@@ -44,20 +44,4 @@ Then, install the Go Protocol Buffers plugin
 ```
 go get github.com/golang/protobuf/protoc-gen-go
 ```
-Build the Go samples in this directory with "make go".  This creates the
-following executable files in the current directory:
-  * add_person_go
-  * list_people_go
-
-Run the example:
-```
-./add_person_go addressbook.data
-```
-to add a person to the protocol buffer encoded file addressbook.data.
-The file is created if it does not exist.  To view the data, run:
-```
-./list_people_go addressbook.data
-```
-Observe that the C++, Python, and Java examples in this directory run in a
-similar way and can view/modify files created by the Go example and vice
-versa.
+See the instructions for building examples in one language above for more information.
