@@ -31,6 +31,11 @@ Note that on some platforms you may have to edit the Makefile and remove
 "-lpthread" from the linker commands (perhaps replacing it with something else).
 We didn't do this automatically because we wanted to keep the example simple.
 
+## CMake ##
+CMake builds for C++ are also supported, though have only been tested on Windows.
+For more information on supported CMake specific build flags and a detailed
+example of how to generate code and link with protobuf using CMake, see
+CMakeLists.txt.
 ## Go ##
 
 The Go example requires a plugin to the protocol buffer compiler, so it is not
