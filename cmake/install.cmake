@@ -98,6 +98,13 @@ export(TARGETS libprotobuf-lite libprotobuf libprotoc protoc
   NAMESPACE protobuf::
   FILE ${CMAKE_INSTALL_CMAKEDIR}/protobuf-targets.cmake
 )
+#Allows using protobuf as a subproject
+foreach(_lib libprotobuf-lite libprotobuf libprotoc)
+  if(TARGET ${_lib})
+    add_library(protobuf::${_lib} ALIAS ${_lib})
+  endif()
+endforeach()
+add_executable(protobuf::protoc ALIAS protoc)
 
 install(EXPORT protobuf-targets
   DESTINATION "${CMAKE_INSTALL_CMAKEDIR}"

@@ -7,6 +7,15 @@ get_filename_component(examples_dir "../examples" ABSOLUTE)
 if(protobuf_VERBOSE)
   message(STATUS "Protocol Buffers Examples Configuring done")
 endif()
+
+option(protobuf_EXTERNAL_PROJECT_EXAMPLES "Build examples as external projects, linking to the install directory rather than the build directory" ON)
+if(NOT protobuf_EXTERNAL_PROJECT_EXAMPLES)
+  add_subdirectory(../examples ../examples)
+  set_target_properties(list_people_cpp add_person_cpp js_embed PROPERTIES FOLDER "Examples")
+  set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+  return()
+endif()
+
 include(ExternalProject)
 
 # Internal utility function: Create a custom target representing a build of examples with custom options.
@@ -27,8 +36,6 @@ function(add_examples_build NAME)
   set_property(TARGET ${NAME} PROPERTY EXCLUDE_FROM_ALL TRUE)
 endfunction()
 
-# Add examples as an external project.
-# sub_directory cannot be used because the find_package(protobuf) call would cause failures with redefined targets.
 add_examples_build(examples "-Dprotobuf_DIR:PATH=${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_CMAKEDIR}")
 add_dependencies(examples libprotobuf protoc)
 

@@ -4,8 +4,10 @@ cmake_minimum_required(VERSION 2.8.12)
 # Project
 project(protobuf-examples)
 
-# Find required protobuf package
-find_package(protobuf CONFIG REQUIRED)
+# Find required protobuf package if we're not a subproject
+if(NOT TARGET protobuf::libprotobuf)
+  find_package(protobuf CONFIG REQUIRED)
+endif()
 
 if(protobuf_VERBOSE)
   message(STATUS "Using Protocol Buffers ${Protobuf_VERSION}")
